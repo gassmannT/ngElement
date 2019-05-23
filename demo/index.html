@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Angular Elements Demo</title>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+    <style></style>
+    <script>
+      function changeCountry() {
+        let countryCode = document.getElementById('countryCode').value;
+        let ce = document.getElementById('gameStatistic');
+        ce.country = countryCode;
+      }
+    </script>
+  </head>
+
+  <body>
+    <input type="text" id="countryCode" value="sui" />
+    <button onclick="changeCountry()">Search</button>
+
+    <world-cup-statistics country="sui" id="gameStatistic"></world-cup-statistics>
+
+    <script src="../dist/ngElement/polyfills-es2015.js"></script>
+    <script src="../dist/ngElement/scripts.js"></script>
+    <script src="../dist/ngElement/main-es2015.js"></script>
+  </body>
+</html>
