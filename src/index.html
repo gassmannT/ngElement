@@ -10,14 +10,27 @@
 
     <script>
       function loadComponent() {
-        let comp = document.createElement('world-cup-statistics');
-        comp.country = 'ger';
-        document.body.appendChild(comp);
+        const foo = document.createElement('world-cup-statistics');
+
+        foo.country = 'ger';
+
+        document.body.appendChild(foo);
       }
     </script>
+
+    <style>
+      h1 {
+        color: red !important;
+      }
+    </style>
   </head>
   <body>
     <button onclick="loadComponent()">Load Component</button><br />
-    <world-cup-statistics country="sui"><div>Hallo Welt</div></world-cup-statistics>
+
+    <world-cup-statistics country="sui">
+      <h2>Subtitle</h2>
+    </world-cup-statistics>
+
+    <input type="date" />
   </body>
 </html>

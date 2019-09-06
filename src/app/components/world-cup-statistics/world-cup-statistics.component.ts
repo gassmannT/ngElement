@@ -1,6 +1,13 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 import { Observable } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Game } from 'src/app/models/models';
 import { GameService } from './../../services/game.service';
 
@@ -8,30 +15,29 @@ import { GameService } from './../../services/game.service';
   selector: 'app-world-cup-statistics',
   templateUrl: 'world-cup-statistics.component.html',
   styleUrls: ['world-cup-statistics.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class WorldCupStatisticsComponent implements OnChanges {
   @Input()
   country: string;
-  public games$: Observable<Game[]>;
+  games$: Observable<Game[]>;
+  games: Game[];
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['country']) {
       console.log('ngOnChanges', this.country);
 
       // not the best idea
-      this.games$ = this.gameService.getGamesByCountry(this.country).pipe(
-        tap(val => console.log(val)),
-        first()
-      );
-      //   this.matches = [];
+      this.games$ = this.gameService
+        .getGamesByCountry(this.country)
+        .pipe(tap(val => console.log(val)));
 
-      //   this.matchService.getMatchesByCountry(this.country).subscribe(list => {
-      //     this.matches = list;
-      //     this.cdr.detectChanges();
-      //   });
+      this.gameService.getGamesByCountry(this.country).subscribe(list => {
+        this.games = list;
+        this.cdr.detectChanges();
+      });
     }
   }
 }

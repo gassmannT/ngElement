@@ -1,5 +1,6 @@
 <h1>Games for {{ country }}</h1>
-<mat-card *ngFor="let game of games$ | async">
+<ng-content></ng-content>
+<mat-card *ngFor="let game of games">
   <mat-card-title>{{ game.home_team.country }} vs. {{ game.away_team.country }}</mat-card-title>
   <mat-card-content
     >in {{ game.venue }} at {{ game.datetime | date: 'dd.MM.yyyy HH:mm' }}
@@ -9,6 +10,4 @@
     >
   </mat-card-content>
 </mat-card>
-<div>{{ (games$ | async)?.length }} games found</div>
-
-<ng-content></ng-content>
+<div>{{ games?.length }} games found</div>

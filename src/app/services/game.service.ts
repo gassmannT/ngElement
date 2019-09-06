@@ -7,7 +7,7 @@ import { Game } from 'src/app/models/models';
   providedIn: 'root'
 })
 export class GameService {
-  private SERVICE_BASE_URL = 'https://worldcup.sfg.io/matches/';
+  private SERVICE_BASE_URL = 'https://world-cup-json-2018.herokuapp.com/matches/';
 
   constructor(private http: HttpClient) {}
 
